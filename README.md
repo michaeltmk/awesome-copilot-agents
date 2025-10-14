@@ -53,7 +53,7 @@ Instructions provides Copilot with repository-specific context, such as coding s
 
 #### Templates
 
-- [General Language](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/boilerplate-and-templates/standard-language.instructions.md) - General language template to build instruction files.
+- [General Language](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/boilerplate-and-templates/standard-language.instructions.md) - Standard language template to build instruction files.
 
 #### Boilerplate
 
