@@ -53,7 +53,7 @@ Instructions provides Copilot with repository-specific context, such as coding s
 
 #### Templates
 
-- [Standard Language Template](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/boilerplate-and-templates/standard-language.instructions.md) - Standard language template to build instruction files.
+- [General Language](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/boilerplate-and-templates/standard-language.instructions.md) - General language template to build instruction files.
 
 #### Boilerplate
 
@@ -107,7 +107,7 @@ Instructions provides Copilot with repository-specific context, such as coding s
 
 #### TypeScript
 
-- [Standard Focus](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/languages/typescript/typescript.instructions.md) - Typescript development for web and Node.js applications.
+- [Standard Focus](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/languages/typescript/typescript.instructions.md) - TypeScript development for web and Node.js applications.
 
 ### Framework / Library
 
@@ -117,7 +117,7 @@ Instructions provides Copilot with repository-specific context, such as coding s
 
 #### Node.js (TypeScript)
 
-- [Azure Function App](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/frameworks/nodejs-typescript/azure-function-app.instructions.md) - Azure Function Apps using Typescript Node.js.
+- [Azure Function App](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/frameworks/nodejs-typescript/azure-function-app.instructions.md) - Azure Function Apps using TypeScript Node.js.
 - [Express API](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/frameworks/nodejs-typescript/express-api.instructions.md) - REST API development with Express.js and TypeScript Node.js.
 
 ### Tools
@@ -132,7 +132,7 @@ Instructions provides Copilot with repository-specific context, such as coding s
 
 ##### Terraform
 
-- [Standard Focus](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/tools/infra-as-code/terraform/terraform.instructions.md) - Standard terraform instructions.
+- [Standard Focus](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/tools/infra-as-code/terraform/terraform.instructions.md) - Standard Terraform instructions.
 - [Atmos](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/tools/infra-as-code/terraform/atmos-terraform.instructions.md) - Terraform workflow orchestration with Atmos framework.
 
 ### Workflows
@@ -143,7 +143,7 @@ A comprehensive workflow for AI-assisted development featuring structured approa
 
 - [PRD Creation](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/workflows/ai-development-instructions/prd-creation.instructions.md) - Create detailed Product Requirements Documents.
 - [Task Generation](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/workflows/ai-development-instructions/task-generation.instructions.md) - Break PRDs into actionable development tasks.
-- [Task Execution](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/workflows/ai-development-instructions/task-execution.instructions.md) - Systematic task execution with proper testing and git practices.
+- [Task Execution](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/instructions/workflows/ai-development-instructions/task-execution.instructions.md) - Systematic task execution with proper testing and Git practices.
 
 ## Prompts
 
@@ -155,7 +155,7 @@ A comprehensive workflow for AI-assisted development featuring structured approa
 
 - [PRD Creation Prompt](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/prompts/ai-development-tasks/prd-creation.prompt.md) - Create detailed Product Requirements Documents using prompt tasks.
 - [Task Generation Prompt](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/prompts/ai-development-tasks/task-generation.prompt.md) - Break PRDs into actionable development tasks using prompt tasks.
-- [Task Execution Prompt](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/prompts/ai-development-tasks/task-execution.prompt.md) - Systematic task execution with proper testing and git practices using prompt tasks.
+- [Task Execution Prompt](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/prompts/ai-development-tasks/task-execution.prompt.md) - Systematic task execution with proper testing and Git practices using prompt tasks.
 
 ## Chatmodes
 
