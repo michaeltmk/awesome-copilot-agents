@@ -2,5 +2,7 @@
   "extends": "../.markdownlint.json",
   "MD041": false,
   "MD025": false,
-  "MD013": false
+  "MD013": false,
+  "MD022": false,
+  "MD032": false
 }
