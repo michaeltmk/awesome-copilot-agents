@@ -38,6 +38,14 @@
         "MD025": false,
         "MD013": false
       }
+    },
+    {
+      "files": "**/*.chatmode.md",
+      "rules": {
+        "MD041": false,
+        "MD025": false,
+        "MD013": false
+      }
     }
   ]
 }
