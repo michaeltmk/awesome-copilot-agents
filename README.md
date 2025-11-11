@@ -7,7 +7,7 @@
   <img src="./imgs/awesome-github-copilot.svg" alt="Awesome Copilot Instructions" height="300">
 </div>
 
-<h4 align="center">✨ A curated list of awesome GitHub instructions, prompt and chatmode markdown files for enhancing your GitHub Copilot AI experience.</h4>
+<h4 align="center">✨ A curated list of awesome GitHub instructions, prompt and chat mode markdown files for enhancing your GitHub Copilot AI experience.</h4>
 
 <!--lint enable remark-lint:awesome-badge-->
 
@@ -35,7 +35,7 @@
   - [Workflows](#workflows)
 - [Prompts](#prompts)
   - [AI Development Tasks](#ai-development-tasks)
-- [Chatmodes](#chatmodes)
+- [Chat Modes](#chat-modes)
   - [AI Development Mode](#ai-development-mode)
 - [How to Use](#how-to-use)
 
@@ -157,12 +157,25 @@ A comprehensive workflow for AI-assisted development featuring structured approa
 - [Task Generation Prompt](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/prompts/ai-development-tasks/task-generation.prompt.md) - Break PRDs into actionable development tasks using prompt tasks.
 - [Task Execution Prompt](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/prompts/ai-development-tasks/task-execution.prompt.md) - Systematic task execution with proper testing and Git practices using prompt tasks.
 
-## Chatmodes
+## Chat Modes
 
 Chat modes in VS Code are predefined settings that customize the Copilots behavior for tasks like asking questions, editing code, or autonomous coding. You can switch between modes anytime in the Chat view based on your needs.
 
+The built-in available chat modes are:
+
+- Agent mode
+- Plan
+- Ask mode
+- Edit mode
+- Custom chat modes (create your own)
+
+[Learn more](https://code.visualstudio.com/docs/copilot/chat/copilot-chat#_switch-between-chat-modes) about the built-in chat modes, how to customize them and how to switch between them.
+
 ### AI Development Mode
 
+- [Architect](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/chatmodes/ai-development-mode/architect.chatmode.md) - Design and plan software systems.
+- [Clean Code](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/chatmodes/ai-development-mode/clean-code.chatmode.md) - Write clean, readable, and maintainable code using clean code best practices.
+- [Debugger](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/chatmodes/ai-development-mode/debugger.chatmode.md) - Debug your application code to find a fix.
 - [PRD Creation](https://github.com/Code-and-Sorts/awesome-copilot-instructions/tree/main/chatmodes/ai-development-mode/prd-creation.chatmode.md) - Build Product Requirements Document (PRD).
 
 ## How to Use
@@ -192,7 +205,7 @@ Chat modes in VS Code are predefined settings that customize the Copilots behavi
 
 `.prompt.md` - Reusable prompts for specific tasks or workflows.
 
-##### Chatmode Files
+##### Chat Mode Files
 
 `.chatmode.md` - Predefined configurations that enable you to tailor the AI chat behavior in VS Code for specific tasks.
 
@@ -202,4 +215,4 @@ Use YAML front matter to specify metadata like `applyTo`, `mode`, and `descripti
 
 ## Contributing
 
-All contributions are welcome! If you would like to share instruction files (`.instructions.md`), prompt files (`.prompt.md`) or chatmodes (`.chatmode.md`), see the [contribution guide](CONTRIBUTING.md) for details.
+All contributions are welcome! If you would like to share instruction files (`.instructions.md`), prompt files (`.prompt.md`) or chat modes (`.chatmode.md`), see the [contribution guide](CONTRIBUTING.md) for details.
