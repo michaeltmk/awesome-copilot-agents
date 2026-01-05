@@ -4,7 +4,7 @@
 
 <!-- [![Awesome](https://awesome.re/badge-flat2.svg)](https://awesome.re) -->
 <div align="center">
-  <img src="./imgs/awesome-github-copilot.svg" alt="Awesome Copilot Instructions" height="300">
+  <img src="./.refs/imgs/awesome-github-copilot.svg" alt="Awesome Copilot Instructions" height="300">
 </div>
 
 <h4 align="center">✨ A curated list of awesome GitHub instructions, prompt and chat mode markdown files for enhancing your GitHub Copilot AI experience.</h4>
