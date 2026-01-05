@@ -183,6 +183,13 @@ The built-in available chat modes are:
 
 Agent Skills are portable, [open standard](https://agentskills.io/home), version-controlled folders of instructions, scripts, and resources that agents can discover and load on demand to do tasks more accurately and efficiently. They let agents gain domain expertise, new capabilities, and repeatable workflows—while making those same skills reusable across different compatible agent products and teams.
 
+### Documents
+
+- [docx](https://github.com/Code-and-Sorts/awesome-copilot-agents/tree/main/skills/documents/docx/README.md) - Document creation, editing, and analysis with support for tracked changes, comments, formatting preservation, and text extraction.
+- [pdf](https://github.com/Code-and-Sorts/awesome-copilot-agents/tree/main/skills/documents/pdf/README.md) - PDF manipulation toolkit for extracting text and tables, creating new PDFs, merging/splitting documents, and handling forms.
+- [pptx](https://github.com/Code-and-Sorts/awesome-copilot-agents/tree/main/skills/documents/pptx/README.md) - Presentation creation, editing, and analysis.
+- [xlsx](https://github.com/Code-and-Sorts/awesome-copilot-agents/tree/main/skills/documents/xlsx/README.md) - Spreadsheet creation, editing, and analysis with support for formulas, formatting, data analysis, and visualization.
+
 ## How to Use
 
 ### Setup Copilot in VSCode
