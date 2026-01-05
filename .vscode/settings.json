@@ -5,6 +5,7 @@
         "chatmodes",
         "imgs",
         "libc",
-        "RAII"
+        "RAII",
+        "Timm"
     ]
 }
