@@ -23,7 +23,7 @@ Interact with Atlassian Jira from the command line using [jira-cli](https://gith
 ## Prerequisites
 
 1. Install jira-cli: `brew install ankitpokhrel/jira-cli/jira-cli` (macOS) or download from [releases](https://github.com/ankitpokhrel/jira-cli/releases)
-2. Set API token: `export JIRA_API_TOKEN="your-token"` (get from https://id.atlassian.com/manage-profile/security/api-tokens)
+2. Set API token: `export JIRA_API_TOKEN="your-token"`
 3. Initialize: `jira init` and follow prompts
 
 ## Issue Commands
