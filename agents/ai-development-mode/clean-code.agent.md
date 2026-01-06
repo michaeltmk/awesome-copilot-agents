@@ -1,5 +1,5 @@
 ---
-description: A chatmode for for writing clean, readable, and maintainable code following established coding guidelines.
+description: An agent for writing clean, readable, and maintainable code following established coding guidelines.
 tools: ['edit', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'extensions', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'openSimpleBrowser', 'fetch', 'githubRepo', 'todos']
 ---
 
