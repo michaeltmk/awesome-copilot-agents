@@ -1,5 +1,5 @@
 name: Feature Request
-description: Suggest a new Copilot instruction, prompt or chatmode pattern or improvement
+description: Suggest a new Copilot instruction, prompt, skill or agent pattern or improvement
 title: "[FEATURE] <title>"
 labels: ["Feature", "Needs Triage"]
 body:
@@ -18,7 +18,8 @@ body:
     options:
       - Instruction
       - Prompt
-      - Chatmode
+      - Custom Agent
+      - Skill
 - type: textarea
   id: feature-description
   attributes:
