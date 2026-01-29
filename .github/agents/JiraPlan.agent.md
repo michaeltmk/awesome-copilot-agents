@@ -1,0 +1,1 @@
+../../cx-copilot/agents/JiraPlan.agent.md
