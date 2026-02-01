@@ -48,9 +48,10 @@ mcp_atlassian_atl_atlassianUserInfo()
 mcp_atlassian_atl_getAccessibleAtlassianResources()
 ```
 
-### Step 2: List and Suggest Epics
+### Step 2: List and Suggest Epics - **PAUSE FOR USER SELECTION**
 
 Search the DS project for epics **excluding Done status**, list all results for user review, and suggest one:
+Hints: epic with DLH prefix are related to data lake house
 
 ```bash
 mcp_atlassian_atl_searchJiraIssuesUsingJql(
@@ -60,9 +61,29 @@ mcp_atlassian_atl_searchJiraIssuesUsingJql(
 )
 ```
 
-### Step 3: List and Suggest Features Under the Epic
+**⚠️ CRITICAL**: After listing all epics, display them in a table format and **PAUSE execution**. Ask the user to confirm which epic they want to link this task to:
 
-After the user selects an epic, list features (custom issue type) under that epic **excluding Done status**, and suggest one:
+```
+Here are the active epics in the DS project:
+
+| Key | Summary | Status |
+|-----|---------|--------|
+| DS-9960 | CXShop Description Generation | In Progress |
+| DS-9732 | Vera Chatbot Evaluation... | In Progress |
+| ... |
+
+Suggested: DS-9505 (Platform Enhancement 2026)
+
+Which epic would you like to link this task to? (Enter epic key, e.g., DS-9505)
+```
+
+**DO NOT PROCEED TO STEP 3 UNTIL USER CONFIRMS EPIC SELECTION.**
+
+### Step 3: List and Suggest Features Under the Epic - **PAUSE FOR USER SELECTION**
+
+**⚠️ MANDATORY STEP**: This step MUST be executed after user confirms epic selection in Step 2. Do NOT skip this step.
+
+After the user selects an epic (e.g., DS-9505), list all features (custom issue type) under that epic **excluding Done status**, and suggest one:
 
 ```bash
 mcp_atlassian_atl_searchJiraIssuesUsingJql(
@@ -72,9 +93,29 @@ mcp_atlassian_atl_searchJiraIssuesUsingJql(
 )
 ```
 
-### Step 4: Create a Single Task from Plan
+**Display results in table format and pause execution**. Ask the user to confirm which feature to link this task to:
 
-Create one task that contains the full plan details (including the repo URL) in the description:
+```
+Here are the active features under DS-9505:
+
+| Key | Summary | Status |
+|-----|---------|--------|
+| DS-9600 | Feature Name 1 | In Progress |
+| DS-9601 | Feature Name 2 | Backlog |
+| ... |
+
+Suggested: DS-9600 (most recently updated)
+
+Which feature would you like to link this task to? (Enter feature key, e.g., DS-9600, or type 'skip' to skip feature linking)
+```
+
+**DO NOT PROCEED TO STEP 4 UNTIL USER CONFIRMS FEATURE SELECTION (OR EXPLICITLY CHOOSES TO SKIP).**
+
+### Step 4: Create a Single Task from Plan with Epic and Feature Links
+
+**After user confirms both Epic (Step 2) and Feature (Step 3)**, create one task that contains the full plan details (including the repo URL) in the description, and link it to both the Epic and Feature:
+
+**IMPORTANT:** The MCP tool signature uses separate parameters (`projectKey`, `issueTypeName`, `summary`, `description`, `assignee_account_id`, `additional_fields`), NOT a single `fields` parameter:
 
 ```bash
 mcp_atlassian_atl_createJiraIssue(
@@ -83,23 +124,50 @@ mcp_atlassian_atl_createJiraIssue(
     issueTypeName='Task',
     summary='[Plan title/name]',
     description='[Full plan details]\n\nRepo: https://github.com/<org>/<repo>',
-    assignee={'accountId': '[current-user-account-id]'},
-    parent={'key': 'DS-EPIC'}
+    assignee_account_id='[current-user-account-id]',
+    additional_fields={
+        'parent': {'key': 'DS-EPIC'}
+    }
 )
 ```
 
-### Step 5: Link the Task to the Feature
+**Known Limitations:**
+- The `additional_fields` parameter does **NOT** support `issuelinks`. Attempting to include it returns error: "Field does not support update 'issuelinks'"
+- Epic linking via `parent` field in `additional_fields` works correctly
+- Feature linking must be done manually (see Step 5)
+- If the parent is not set during creation, you can update it afterward using `editJiraIssue` with `fields={'parent': {'key': 'DS-EPIC'}}`
 
-Add a link "is the story of (feature)" to the selected feature:
+### Step 5: Feature Linking (Manual Step Required)
+
+The MCP `createJiraIssue` tool does not support `issuelinks` via `additional_fields`. Feature linking must be done manually by the user.
+
+Provide the user with manual linking instructions:
+
+**Manual Linking Instructions:**
+1. Open the created task in Jira: https://cathaypacific-prod.atlassian.net/browse/DS-[TASK-NUMBER]
+2. In the issue details, click "Link issue"
+3. Select link type: "is the story of (feature)"
+4. Enter the Feature key: DS-[FEATURE-NUMBER]
+5. Click "Link"
+
+**Optional:** If comment tool is available, you can add a note to the task:
 
 ```bash
-mcp_atlassian_atl_linkJiraIssues(
+mcp_atlassian_atl_addCommentToJiraIssue(
     cloudId='185c3776-e3b3-43d4-93e2-db06ed56cd45',
-    issueKey='DS-TASK',
-    linkedIssueKey='DS-FEATURE',
-    linkType='is the story of (feature)'
+    issueIdOrKey='DS-TASK',
+    commentBody='**Note:** Feature link to DS-FEATURE ([Feature Summary]) must be manually added using "is the story of (feature)" relationship type in Jira UI.'
 )
 ```
+4. Enter the feature key: DS-FEATURE
+5. Click "Link"
+
+**Technical Details (from DS-9672 analysis):**
+- Link Type ID: 10404
+- Link Type Name: "Feature Story Relationship"
+- Inward: "is the story of (feature)" ← Task perspective
+- Outward: "is the feature of (story)" ← Feature perspective
+- For issue links, use `inwardIssue` when creating from the task pointing to the feature
 
 ### Step 6: Confirm the Single Task
 
@@ -133,20 +201,28 @@ Plan: Implement ML Pipeline
 1. Get user info and cloud ID
 2. List all active (non-Done) epics in DS, suggest one, and wait for user selection
 3. List all active (non-Done) features under the selected epic, suggest one, and wait for user selection
-4. Create a single task with parent link and the full plan details plus repo URL in the description:
+4. Create a single task with both parent (epic) and issuelinks (feature) in one call:
 
 ```bash
 mcp_atlassian_atl_createJiraIssue(
     cloudId='185c3776-e3b3-43d4-93e2-db06ed56cd45',
-    projectKey='DS',
-    issueTypeName='Task',
-    summary='Implement ML Pipeline',
-    description='Data preprocessing\nModel training\nModel evaluation\nDeployment\n\nRepo: https://github.com/<org>/<repo>',
-    assignee={'accountId': 'user-account-id'},
-    parent={'key': 'DS-9500'}
+    fields={
+        'project': {'key': 'DS'},
+        'issuetype': {'name': 'Task'},
+        'summary': 'Implement ML Pipeline',
+        'description': 'Data preprocessing\nModel training\nModel evaluation\nDeployment\n\nRepo: https://github.com/<org>/<repo>',
+        'assignee': {'accountId': 'user-account-id'},
+        'parent': {'key': 'DS-9500'},
+        'issuelinks': [
+            {
+                'inwardIssue': {'key': 'DS-FEATURE'},
+                'type': {'name': 'Feature Story Relationship'}
+            }
+        ]
+    }
 )
 ```
-5. Link the task to the selected feature using "is the story of (feature)".
+5. If the feature link was not created, add a comment for manual linking (Step 5 fallback).
 6. Provide the created issue link to the user.
 
 ## Plan Format Recognition
@@ -185,15 +261,34 @@ Details...
 
 ## Best Practices
 
-1. **Confirm Before Creating**: Ask user to confirm before creating the task
-2. **Show Summary**: Display a summary of what will be created:
-    - "I will create 1 task in DS project assigned to you"
-3. **Provide Links**: After creation, provide the created issue link
-4. **Group Related Tasks**: If plan has phases/groups, consider creating an Epic first
-5. **Preserve Context**: Include relevant context from the plan and the repo URL in the description
-6. **Epic/Feature Review**: Always list all active (non-Done) epics and features for the user and suggest one before proceeding
-7. **Skip Completed Work**: Exclude epics and features with status "Done" or "Accepted" from search results to focus on active work items
-8. **Feature Terminology**: Note that "Feature" is a custom issue type in DS project, not a Story. Use `issuetype = Feature` in JQL queries
+1. **\u26a0\ufe0f MANDATORY CONFIRMATION GATES**:
+   - **Step 2**: MUST pause after listing epics and wait for user to confirm epic selection
+   - **Step 3**: MUST execute after Step 2 - never skip this step
+   - **Step 3 Pause**: MUST pause after listing features and wait for user to confirm feature selection (or explicitly skip)
+   - **Step 4**: ONLY create the task after both Step 2 and Step 3 confirmations
+
+2. **Confirm Before Creating**: Ask user to confirm before creating the task
+   - "I will create 1 task in DS project assigned to you linked to Epic [KEY] and Feature [KEY]"
+
+3. **Show Summary**: Display a summary of what will be created:
+   - Epic selection (confirmed by user)
+   - Feature selection (confirmed by user)
+   - Assignee (current user)
+   - Repository link included in description
+
+4. **Provide Links**: After creation, provide the created issue link
+
+5. **Group Related Tasks**: If plan has phases/groups, consider creating an Epic first
+
+6. **Preserve Context**: Include relevant context from the plan and the repo URL in the description
+
+7. **Epic/Feature Review**: Always list all active (non-Done) epics and features for the user and suggest one before proceeding - DO NOT ASSUME
+
+8. **Skip Completed Work**: Exclude epics and features with status "Done" or "Accepted" from search results to focus on active work items
+
+9. **Feature Terminology**: Note that "Feature" is a custom issue type in DS project, not a Story. Use `issuetype = Feature` in JQL queries
+
+10. **Never Assume**: Never skip user confirmation steps or assume which epic/feature to use. Always present options and wait for explicit user selection.
 
 ## Error Handling
 

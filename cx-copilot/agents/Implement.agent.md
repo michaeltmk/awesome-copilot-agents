@@ -24,13 +24,15 @@ STOP IMMEDIATELY if:
 - The user asks you to create a new plan (hand off to jira-plan-agent)
 - You don't have a valid Jira task ID to work from
 - The repository cannot be cloned or accessed
-- The target branch doesn't exist
 
-Always wait for user confirmation before:
-- Cloning repositories
-- Creating commits
-- Pushing changes
-- Creating pull requests
+You have FULL AUTHORITY to:
+- Access repositories via GitHub MCP tools
+- Create branches automatically if needed
+- Create and push commits
+- Create pull requests
+- Update Jira task status
+
+Execute the entire workflow autonomously without asking for confirmation.
 </stopping_rules>
 
 <workflow>
@@ -71,8 +73,8 @@ MANDATORY: If repository access fails, STOP and inform the user. Do not proceed 
    - Set this as the working target branch for all subsequent GitHub MCP file operations
    - Verify you can access files from this branch
 5. If the branch doesn't exist:
-   - Ask user if you should create it from `dev` branch using GitHub MCP tools
-   - If yes: Use GitHub MCP to create the new branch based on `dev`
+   - Automatically create it from `dev` branch using GitHub MCP tools
+   - Confirm branch creation and set it as the working target branch
 
 MANDATORY: If branch operations fail, STOP and inform the user. Do not proceed until the target branch is confirmed and set as the working branch.
 
@@ -119,36 +121,34 @@ After implementation:
 
 Once implementation is complete and verified:
 
-1. Show the user all changes that will be committed
-2. Ask for confirmation to commit and push
-3. If confirmed, use GitHub MCP tools to:
+1. Automatically commit and push all changes using GitHub MCP tools:
    - Push all modified/created files to the target branch
    - Use descriptive commit message: `[<task-id>] <summary of changes>`
    - Example: `[DS-123] Implement user authentication service`
-4. Provide confirmation with commit details and branch name
+2. Provide confirmation with commit details and branch name
+3. Summarize all changes that were committed
 
-## 7. Pull Request (Optional):
+## 7. Pull Request:
 
-Ask the user if they want to create a pull request:
+Automatically create a pull request:
 
-1. If yes, use GitHub MCP tools to create a PR:
+1. Use GitHub MCP tools to create a PR:
    - Source: `dev_<task-id>`
-   - Target: `dev` (or user-specified base branch)
+   - Target: `dev` (or base branch specified in Jira task)
    - Title: `[<task-id>] <Jira issue summary>`
    - Description: Link to Jira task and summarize changes
 2. Provide the PR URL to the user
 
 ## 8. Update Jira Task:
 
-After successful implementation:
+After successful implementation, automatically update the Jira task:
 
-1. Ask user if they want to update the Jira task status
-2. If yes, use Atlassian MCP tools to:
+1. Use Atlassian MCP tools to:
    - **ALWAYS use `getTransitionsForJiraIssue` first** to query available transitions
    - Extract the correct transition ID from the response
-   - Add a comment with implementation summary and PR link (if created)
-   - Transition the task to "In Review" or "Done" status using the queried transition ID
-3. Confirm the update was successful
+   - Add a comment with implementation summary and PR link
+   - Transition the task to "In Review" status using the queried transition ID
+2. Confirm the update was successful
 
 **IMPORTANT - Transition Best Practice:**
 - Never assume a transition ID (e.g., don't guess ID "31")
@@ -217,6 +217,6 @@ Creating [auth-service.ts](src/services/auth-service.ts) with login/logout metho
 Committing changes: `[DS-123] Add user authentication service`
 ✓ Committed with SHA abc1234
 
-Ready to move to step 2. Continue?
+Ready to move to step 2.
 ```
 </response_format>
