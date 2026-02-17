@@ -1,3 +1,7 @@
+---
+applyTo: '**'
+---
+
 # GitHub Copilot Instructions
 
 These instructions define how GitHub Copilot should assist with this project. The goal is to ensure consistent, high-quality code generation aligned with our conventions, stack, and best practices.
@@ -48,7 +52,7 @@ tests/
 - Favor async endpoints for I/O-bound services (FastAPI, aiohttp).
 - Document functions and classes with docstrings.
 
-### 🚫 Patterns to Avoid
+### 🚫 Patterns to Avoidpython.instructions.md
 
 - Don’t use wildcard imports (`from module import *`).
 - Avoid global state unless encapsulated in a singleton or config manager.
