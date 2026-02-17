@@ -1,0 +1,1 @@
+../../cx-copilot/skills/jira-default.md
